@@ -1,5 +1,6 @@
 # COL761 | Data Mining
-Prof. Sayan Ranu
+
+Prof. Sayan Ranu\\
 Semester I, 2021-22
 
 # About
