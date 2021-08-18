@@ -1,7 +1,7 @@
 # COL761 | Data Mining
-
 Prof. Sayan Ranu </br>
-Semester I, 2021-22
+Semester 1, 2021-22
 
 # About
-This repository contains all our homework assignments.
+This repository contains all </br>
+our homework assignments.
