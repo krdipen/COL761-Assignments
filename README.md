@@ -1,4 +1,4 @@
-# COL761-Assignments
+# COL761 | DATA MINING
 Prof. Sayan Ranu
 
 # About
