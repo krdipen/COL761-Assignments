@@ -139,7 +139,7 @@ int main(int argc , char* argv[]){
 				auto end = clock();
 				auto time = (float)(end-start);
 				time /= CLOCKS_PER_SEC;
-				if(time >= 52*60) {exiter2=true;break;}
+				if(time >= 55*60) {exiter2=true;break;}
 			}
 			if(exiter2) break;
 		}
@@ -153,7 +153,7 @@ int main(int argc , char* argv[]){
 			auto end = clock();
 			auto time = (float)(end-start);
 			time /= CLOCKS_PER_SEC;
-			if(time >= 55*60) {exiter3=true; break;}
+			if(time >= 57*60) {exiter3=true; break;}
 		}
 		F.push_back(si);
 		if(exiter || exiter2 || exiter3) break;
