@@ -21,7 +21,7 @@ int main(int argc , char* argv[]){
 	x = x/100;
 	int trans = 0;
 
-	vector<set<vector<int>>> F;			// F_i contains frequent itemset of size (i+1);
+	vector<set<vector<int> > > F;			// F_i contains frequent itemset of size (i+1);
 	
 	map<vector<int>,int> F0;
 	int support = 0;
@@ -43,7 +43,7 @@ int main(int argc , char* argv[]){
 			// if(++linec == 100) break;
 		}
 		support = ceil(x*trans);
-		set<vector<int>> s;
+		set<vector<int> > s;
 		for(auto &el: m){
 			if(el.second>=support){
 				s.insert({el.first});
@@ -58,7 +58,7 @@ int main(int argc , char* argv[]){
 
 		// cout << "i : " << i << endl;
 		
-		set<vector<int>> &Fim1 = F[i-1];
+		set<vector<int> > &Fim1 = F[i-1];
 		map<vector<int>,int> candidates;
 
 		int cand_gen_loop = 0;
@@ -146,7 +146,7 @@ int main(int argc , char* argv[]){
 		inputFile.close();
 
 		bool exiter3 = false;
-		set<vector<int>> si;
+		set<vector<int> > si;
 		for(auto &candidate : candidates){
 			if(candidate.second >= support) si.insert(candidate.first);
 			

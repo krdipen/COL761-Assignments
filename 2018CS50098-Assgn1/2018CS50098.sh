@@ -5,7 +5,11 @@ if [ $1 = "-apriori" ]; then
 	Xval=$3
 	OutF=$4
 	./apriori $InpF $Xval $OutF
-elif [ $1 = "-plot" ]; then
-	echo "plot's loop"
+elif [ $2 = "-plot" ]; then
+	InpF=$1
+	python plot.py $InpF
 elif [ $1 = "-prefixspan"]; then
-	echo "prefix"
+	InpF=$2
+	Xval=$3
+	OutF=$4
+	./prefixspan $InpF $Xval $OutF
