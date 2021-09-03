@@ -56,7 +56,7 @@ int main(int argc , char* argv[]){
 	bool exiter = false;
 	for(int i = 1 ; (int)F[i-1].size()!= 0 ; i++){	// size of new is (i+1);
 
-		cout << "i : " << i << endl;
+		// cout << "i : " << i << endl;
 		
 		set<vector<int>> &Fim1 = F[i-1];
 		map<vector<int>,int> candidates;
@@ -84,13 +84,11 @@ int main(int argc , char* argv[]){
 				else{
 					cand_gen[i-1] = sec[i-1]; cand_gen[i] = fir[i-1];	
 				}
-
 				
 				// prune 1 :
 				// Iterate through the vector to create a 1 minus sized vector :
 				// for all such vectors : remove if support is less than 0
 				
-
 				vector<int> vector_checker(i);
 				for(int iter = 0; iter<i; iter++) {vector_checker[iter] = cand_gen[iter+1];}
 				flag = false;
@@ -101,19 +99,21 @@ int main(int argc , char* argv[]){
 				if(flag) continue;
 
 				candidates[cand_gen] = 0;
+
+				// time limit!
+				auto end = clock();
+				auto time = (float)(end-start);
+				time /= CLOCKS_PER_SEC;
+				if(time >= 48*60) {exiter=true;break;}
 			}
-			// time limit!
-			auto end = clock();
-			auto time = (float)(end-start);
-			time /= CLOCKS_PER_SEC;
-			if(time > 55*60) {exiter=true;break;}
+			if(exiter) break;
 		}
-		if(exiter) break;
 
 		// prune 2 :
 		// go through all transactions : find count.
 
 		// ifstream inputFile;
+		bool exiter2 = false;
 		inputFile.open(datafile);
 		if(inputFile.is_open()){
 			string tp;
@@ -136,17 +136,24 @@ int main(int argc , char* argv[]){
 
 					if(iter==i+1) candidates[candidate.first]++;
 				}
-				// if(++linec == 100) break;
+				auto end = clock();
+				auto time = (float)(end-start);
+				time /= CLOCKS_PER_SEC;
+				if(time >= 52*60) {exiter2=true;break;}
 			}
+			if(exiter2) break;
 		}
 		inputFile.close();
 
 		set<vector<int>> si;
 		for(auto &candidate : candidates){
 			if(candidate.second >= support) si.insert(candidate.first);
-			prune_two_count++;
+			
+			auto end = clock();
+			auto time = (float)(end-start);
+			time /= CLOCKS_PER_SEC;
+			if(time >= 55*60) {break;}
 		}
-		// cout << "After prune 2: " << prune_two_count << endl;
 		F.push_back(si);
 	}
 
