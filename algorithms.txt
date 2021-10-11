@@ -1,0 +1,90 @@
+COL761 - Data Mining
+
+Assignment 2 - Q3
+
+Algorithms used for KNN Querying -
+
+1. KD Tree -
+
+Suppose the data dimension is d, Q be the query point.
+Initialize d_k as infinity.
+
+Initialize an empty priority queue PQ.
+We run KNN(ROOT, 0).
+
+KNN(node N , int dim):
+	compute d = dist( N,Q )
+	if( d<d_k):
+		PQ.insert(d,N)
+		update d_k
+	if(Q[dim] <= N[dim]):
+		KNN(N->left, (dim+1)%d)
+		if( Q.intersect_dist(N,d) <= d_k):
+			KNN(N->right, (dim+1)%d)
+	else:
+		KNN(N->right, (dim+1)%d)
+		if( Q.intersect_dist(N,d) <= d_k):
+			KNN(N->right, (dim+1)%d)
+
+Here, Q.intersect_dist(N,d) finds the minimum distance of the divider at N from the query point Q.
+This might have other ways to implement for other similarity functions.
+This would essentially be calculated by - finding the distance between Q and N keeping all the dimensions except d, as same.
+i.e. if Q = (1,2,3) and N = (3,4,5) and d = 0, then the L2 metric distance would be given by 2 i.e. 3-1 = 2.
+
+Essentially we want to check whether the hyper-sphere centered at Q with a radius of k_d is intersecting the divider that created at the point N.
+
+Prioity Queue inserts working -
+PQ.insert(key K, obj O):
+	regular insert to a PQ.
+	if(len(PQ) > k):
+		pop(last element) // one with highest key
+
+the "update d_k" step assigns the highest value of the key to the d_k.
+
+
+	
+
+
+
+2. M-Tree -
+
+Consider the query Q, Top Node ROOT, and a number k
+
+In algo below,
+P(O_r) corresponds to the parent of the Node O_r of the M-tree.
+O_j in N corresponds to the Nodes present in the M-tree.
+O_j in the leaf nodes corresponds N corresponds to the Nodes present in the M-tree.
+ptr(T(O_r)) : corresponds to the pointer to the root of the covering tree of O_r given by T(O_r).
+r(O_r) : max distance of the object in the covering tree from their root.
+
+we do =>  KNN(ROOT ,  Q , k)
+
+Initialize PQ (priority queue of required elements) as empty and d_k as infinity.
+
+KNN ( node N , node Q , int k ):
+	
+	consider O_p = P(N)
+
+	if ( N is leaf):
+		for all O_j in N:
+			if ( |d(O_j , Q) - d(O_j,O_p)| <= d_k ):
+				compute( d(O_j , Q) )
+				if ( d(O_j, Q) <= d_k ):
+					PQ.insert( d(O_j,Q) , O_j)
+					update d_k
+	else: // i.e. N is not a leaf
+		for all O_r in N:
+			if( |d(O_p , Q) - d(O_r,O_p)| <= d_k + r(O_r) ):
+				compute( d(O_r,Q) )
+				if( d_min(T(O_r)) <= d_k ):
+					PQ.insert(d_min(T(O_r)) , ptr(T(O_r)))
+					update d_k
+
+Prioity Queue inserts working -
+
+PQ.insert(key K, obj O):
+	regular insert to a PQ.
+	if(len(PQ) > k):
+		pop(last element) // one with highest key
+
+the "update d_k" step assigns the highest value of the key to the d_k.
