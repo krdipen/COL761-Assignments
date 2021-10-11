@@ -1,11 +1,26 @@
 #include<bits/stdc++.h>
 using namespace std;
-#include "ap.h"
-#include "linalg.h"
 
+#include "alglibinternal.h"
+#include "alglibmisc.h"
+#include "ap.h"
+#include "dataanalysis.h"
+#include "diffequations.h"
+#include "fasttransforms.h"
+#include "integration.h"
+#include "interpolation.h"
+#include "linalg.h"
+#include "optimization.h"
+#include "solvers.h"
+#include "specialfunctions.h"
+#include "statistics.h"
+#include "stdafx.h"
 
 // wget https://www.alglib.net/translator/re/alglib-3.17.0.cpp.gpl.zip
 // unzip alglib-3.17.0.cpp.gpl.zip
+// for compilation - 
+// g++ -Icpp/src tree.cpp cpp/src/*.cpp -o tree_bin
+
 
 void readData_old(vector<vector<string>> &dat, string datafile){
 	ifstream inputFile;
